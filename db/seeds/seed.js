@@ -1,7 +1,7 @@
 const format = require('pg-format');
 const db = require('../connection');
 
-function seed() {
+function seed({usersData}) {
     return db
     .query(`DROP TABLE IF EXISTS users`)
     .then(() => {
@@ -14,6 +14,14 @@ function seed() {
         );`
         );
     })
+    .then(() => {
+        const insertUsersQueryStr = format(
+            `INSERT INTO users(name, username, email) VALUES %L;`,
+            usersData.map(({name, username, email}) => [name, username, email])
+        );
+
+        return db.query(insertUsersQueryStr)
+    })
 }
 
-seed();
+module.exports = seed;

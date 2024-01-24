@@ -4,7 +4,9 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "seed": "PGDATABASE=projectmanager node ./db/seeds/run-seed.js",
+    "setup-dbs": "psql -f ./db/setup.sql"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,6 @@
-const { getAllUsersData } = require('./controllers/users.controller');
+const { getAllUsersData,
+getUserData } = require('./controllers/users.controller');
+const {serverErrorHandler, customErrorHandler} = require('./error-handlers');
 
 const express = require('express');
 
@@ -6,8 +8,10 @@ const app = express();
 
 app.get(`/api/users`, getAllUsersData)
 
-app.use((err, request, response) => {
-    this.response.status(500).send(err)
-})
+app.get(`/api/user/:userId`, getUserData)
+
+app.use(customErrorHandler)
+
+app.use(serverErrorHandler)
 
 module.exports = app;

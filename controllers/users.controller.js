@@ -4,7 +4,7 @@ const { allUsersData,
 function getAllUsersData(_ , response, next) {
     return allUsersData()
     .then((usersData) => {
-        response.status(200).send(usersData);
+        response.status(200).send({users: usersData});
     });
 };
 

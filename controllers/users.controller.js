@@ -1,10 +1,21 @@
-const { allUsersData } = require('../models/users.model');
+const { allUsersData,
+    userData } = require('../models/users.model');
 
-function getAllUsersData(request, response, next) {
+function getAllUsersData(_ , response, next) {
     return allUsersData()
     .then((usersData) => {
         response.status(200).send(usersData);
     });
 };
 
-module.exports = { getAllUsersData };
+function getUserData(request, response, next) {
+    const { userId } = request.params;
+    return userData(userId)
+    .then((userDataResult) => {
+        return response.status(200).send({user: userDataResult})
+    })
+    .catch(next)
+}
+
+module.exports = { getAllUsersData,
+    getUserData};

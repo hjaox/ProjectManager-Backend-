@@ -14,12 +14,11 @@ function userData(userId) {
     const userDataQueryStr = format(
         `SELECT * FROM users WHERE user_id = %L`, [userId]
     );
-    
+
     return db
     .query(userDataQueryStr)
     .then(({rows}) => {
         if(!rows.length) return Promise.reject({status: 400, msg: "Not Found"});
-        console.log('test')
         return rows[0];
     })
 }

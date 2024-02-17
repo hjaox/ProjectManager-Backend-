@@ -9,8 +9,10 @@ function getAllUsersData(_ , response, next) {
 };
 
 function getUserData(request, response, next) {
-    const { userId } = request.params;
-    return userData(userId)
+    const { username } = request.params;
+    const { password } = request.params;
+    console.log(username, password)
+    return userData(username, password)
     .then((userDataResult) => {
         return response.status(200).send({user: userDataResult})
     })

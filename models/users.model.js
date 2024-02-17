@@ -10,15 +10,17 @@ function allUsersData() {
 
 }
 
-function userData(userId) {
+function userData(username, password) {
     const userDataQueryStr = format(
-        `SELECT * FROM users WHERE user_id = %L`, [userId]
+        `SELECT * FROM users WHERE username = %L`, [username]
     );
 
     return db
     .query(userDataQueryStr)
     .then(({rows}) => {
         if(!rows.length) return Promise.reject({status: 400, msg: "Not Found"});
+        if(rows[0].password !== password) return Promise.reject({status: 400, msg: "Incorrect Username or Password"});
+
         return rows[0];
     })
 }

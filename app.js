@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get(`/api/users`, getAllUsersData)
 
-app.get(`/api/user/:userId`, getUserData)
+app.get(`/api/user/:username/:password`, getUserData)
 
 app.use(customErrorHandler)
 

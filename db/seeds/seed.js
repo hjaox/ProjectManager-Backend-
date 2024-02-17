@@ -45,7 +45,8 @@ function createUsersTable() {
             user_id SERIAL PRIMARY KEY,
             name VARCHAR NOT NULL,
             username VARCHAR NOT NULL,
-            email VARCHAR NOT NULL
+            email VARCHAR NOT NULL,
+            password VARCHAR NOT NULL
         );`
     );
 }
@@ -87,8 +88,8 @@ function createCardsTable() {
 //insert dev data into users table
 function insertUsersData(usersData) {
     const insertUsersQueryStr = format(
-        `INSERT INTO users(name, username, email) VALUES %L;`,
-        usersData.map(({name, username, email}) => [name, username, email])
+        `INSERT INTO users(name, username, email, password) VALUES %L;`,
+        usersData.map(({name, username, email, password}) => [name, username, email, password])
     );
     return db.query(insertUsersQueryStr);
 }

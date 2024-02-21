@@ -1,10 +1,10 @@
 const { selectProjectsByUserID } = require('../models/projects.model');
 
-function getProjectsByUserID(request, response, next) {
-    const { userID } = response.params;
+function getProjectsByUserID(request , response, next) {
+    const { userID } = request.params;
     return selectProjectsByUserID(userID)
-    .then(data => {
-        console.log(data)
+    .then(projectsDataByUserIDResult => {
+        return response.status(200).send({projects: projectsDataByUserIDResult});
     })
 }
 
